@@ -3,17 +3,14 @@ const mongoose = require("mongoose");
 const app = express();
 const FoodModel = require("./models/Food");
 const cors = require("cors");
-
+const mongoKey = process.env.MONGO;
 app.use(express.json());
 app.use(cors());
-mongoose.connect(
-  "mongodb+srv://root:root@my-first-app.t3sx8.mongodb.net/my-first-app?authSource=admin&replicaSet=atlas-v5oaw1-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true",
-  {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-    useFindAndModify: false,
-  }
-);
+mongoose.connect(mongoKey, {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useFindAndModify: false,
+});
 
 app.post("/insert", async (req, res) => {
   const foodName = req.body.foodName;
